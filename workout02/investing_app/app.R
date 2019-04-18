@@ -40,7 +40,7 @@ ui <- fluidPage(
                        value = 2000, 
                        step = 500)), 
     column(width = 4, 
-           sliderInput("return", 
+           sliderInput("ret", 
                        "Return Rate (%)", 
                        min = 0, 
                        max = 20, 
@@ -83,7 +83,7 @@ server <- function(input, output) {
     fixed_contrib <- rep(0, input$years + 1)
     growing_contrib <- rep(0, input$years + 1)
     
-    ret <- input$return/100
+    ret <- input$ret/100
     growth <- input$growth/100
     
     for (t in year) {
@@ -173,7 +173,7 @@ server <- function(input, output) {
     fixed_contrib <- rep(0, input$years + 1)
     growing_contrib <- rep(0, input$years + 1)
     
-    ret <- input$return/100
+    ret <- input$ret/100
     growth <- input$growth/100
     
     for (t in year) {
