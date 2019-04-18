@@ -7,6 +7,20 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 
+#functions 
+future_value <- function(amount = 0, rate = 0, years = 0) {
+  fv <- amount*(1 + rate)^years
+  return(fv)
+}
+annuity <- function(contrib = 0, rate = 0, years = 0) {
+  fva <- contrib*(((1+rate)^years-1)/rate)
+  return(fva)
+}
+growing_annuity <- function(contrib = 0, rate = 0, growth = 0, years = 0) {
+  fvga <- contrib*(((1+rate)^years - (1+growth)^years)/(rate-growth))
+  return(fvga)
+}
+
 ui <- fluidPage(
   
   titlePanel("Comparing Investment Modalities"),
@@ -61,22 +75,8 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  output$graph <- renderPlot({
-    
-    #functions 
-    future_value <- function(amount = 0, rate = 0, years = 0) {
-      fv <- amount*(1 + rate)^years
-      return(fv)
-    }
-    annuity <- function(contrib = 0, rate = 0, years = 0) {
-      fva <- contrib*(((1+rate)^years-1)/rate)
-      return(fva)
-    }
-    growing_annuity <- function(contrib = 0, rate = 0, growth = 0, years = 0) {
-      fvga <- contrib*(((1+rate)^years - (1+growth)^years)/(rate-growth))
-      return(fvga)
-    }
-    
+  #no facet data
+  mod <- reactive({
     #data
     year <- c(0:input$years)
     no_contrib <- rep(0, input$years + 1)
@@ -92,7 +92,6 @@ server <- function(input, output) {
       growing_contrib[t+1] <- future_value(input$initial, return, t) + growing_annuity(input$contrib, return, growth, t)
     }
     
-    #no facet data
     modalities <- as.data.frame(
       matrix(c(year, 
                no_contrib, 
@@ -107,10 +106,26 @@ server <- function(input, output) {
                       "growing_contrib"))))
     
     modalities[,2:4] <- round(modalities[,2:4], 2)
+    modalities
+  })
+  
+  #with facet data
+  mod2 <- reactive({
+    #data
+    year <- c(0:input$years)
+    no_contrib <- rep(0, input$years + 1)
+    fixed_contrib <- rep(0, input$years + 1)
+    growing_contrib <- rep(0, input$years + 1)
     
-    cols <- c("no_contrib" = 2, "fixed_contrib" = 3, "growing_contrib" = 4)
+    return <- input$return/100
+    growth <- input$growth/100
     
-    #with facet data
+    for (t in year) {
+      no_contrib[t+1] <- future_value(input$initial, return, t)
+      fixed_contrib[t+1] <- future_value(input$initial, return, t) + annuity(input$contrib, return, t)
+      growing_contrib[t+1] <- future_value(input$initial, return, t) + growing_annuity(input$contrib, return, growth, t)
+    }
+    
     modalities2 <- as.data.frame(
       matrix(c(no_contrib,
                fixed_contrib, 
@@ -135,10 +150,16 @@ server <- function(input, output) {
                                      "fixed_contrib", 
                                      "growing_contrib"
                                    ))
+    modalities2
+  })
+  
+  output$graph <- renderPlot({
     
     #graph
+    cols <- c("no_contrib" = 2, "fixed_contrib" = 3, "growing_contrib" = 4)
+    
     if (input$facet == "No") {
-      ggplot(modalities) + 
+      ggplot(mod()) + 
         geom_line(aes(x=year, y=no_contrib, color = "no_contrib"), size=1, alpha=.5) + 
         geom_point(aes(x=year, y=no_contrib, color = "no_contrib"), size=.7, alpha=.5) + 
         geom_line(aes(x=year, y=fixed_contrib, color = "fixed_contrib"), size=1, alpha=.5) + 
@@ -148,7 +169,7 @@ server <- function(input, output) {
         scale_color_manual("variables", breaks = c("no_contrib", "fixed_contrib", "growing_contrib"), values = cols) + 
         labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)")
     } else {
-      ggplot(modalities2) + 
+      ggplot(mod2()) + 
         geom_area(aes(x = year, y = balances, color = variable, fill = variable), alpha = .5) + 
         geom_point(aes(x = year, y = balances, color = variable), size = .5) + 
         theme_bw() + 
@@ -159,41 +180,7 @@ server <- function(input, output) {
   })
   
   output$table <- renderTable({
-    
-    #functions 
-    future_value <- function(amount = 0, rate = 0, years = 0) {
-      fv <- amount*(1 + rate)^years
-      return(fv)
-    }
-    annuity <- function(contrib = 0, rate = 0, years = 0) {
-      fva <- contrib*(((1+rate)^years-1)/rate)
-      return(fva)
-    }
-    growing_annuity <- function(contrib = 0, rate = 0, growth = 0, years = 0) {
-      fvga <- contrib*(((1+rate)^years - (1+growth)^years)/(rate-growth))
-      return(fvga)
-    }
-    
-    #data
-    year <- c(0:input$years)
-    no_contrib <- rep(0, input$years + 1)
-    fixed_contrib <- rep(0, input$years + 1)
-    growing_contrib <- rep(0, input$years + 1)
-    
-    return <- input$return/100
-    growth <- input$growth/100
-    
-    for (t in year) {
-      no_contrib[t+1] <- future_value(input$initial, return, t)
-      fixed_contrib[t+1] <- future_value(input$initial, return, t) + annuity(input$contrib, return, t)
-      growing_contrib[t+1] <- future_value(input$initial, return, t) + growing_annuity(input$contrib, return, growth, t)
-    }
-    
-    modalities <- as.data.frame(matrix(c(year, no_contrib, fixed_contrib, growing_contrib), input$years + 1, 4, dimnames = list(0:input$years, c("year", "no_contrib", "fixed_contrib", "growing_contrib"))))
-    
-    modalities[,2:4] <- round(modalities[,2:4], 2)
-    
-    modalities
+    mod()
   })
 }
 
