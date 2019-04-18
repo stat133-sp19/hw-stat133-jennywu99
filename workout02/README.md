@@ -1,6 +1,6 @@
 # Workout02: Savings & Investment Model
 
-an app modeling different modes of savings and investment
+an app modeling three different modes of savings and investment
 
 ## Inputs
 + Initial Amount = initial savings balance

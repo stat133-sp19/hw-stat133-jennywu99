@@ -1,3 +1,8 @@
+# Workout02: Savings & Investment Model
+## Outputs:
+##    timeline of savings balance for each investment mode
+##    table of savings balance for each investment mode
+
 library(shiny)
 library(dplyr)
 library(ggplot2)
@@ -132,7 +137,6 @@ server <- function(input, output) {
                                    ))
     
     #graph
-    
     if (input$facet == "No") {
       ggplot(modalities) + 
         geom_line(aes(x=year, y=no_contrib, color = "no_contrib"), size=1, alpha=.5) + 
@@ -141,12 +145,7 @@ server <- function(input, output) {
         geom_point(aes(x=year, y=fixed_contrib, color = "fixed_contrib"), size=.7, alpha=.5) + 
         geom_line(aes(x=year, y=growing_contrib, color = "growing_contrib"), size=1, alpha=.5) + 
         geom_point(aes(x=year, y=growing_contrib, color = "growing_contrib"), size=.7, alpha=.5) + 
-        scale_color_manual("variables", 
-                           breaks = c(
-                             "no_contrib", 
-                             "fixed_contrib", 
-                             "growing_contrib"), 
-                           values = cols) + 
+        scale_color_manual("variables", breaks = c("no_contrib", "fixed_contrib", "growing_contrib"), values = cols) + 
         labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)")
     } else {
       ggplot(modalities2) + 
