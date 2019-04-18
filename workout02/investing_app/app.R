@@ -76,19 +76,20 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   output$graph <- renderPlot({
+    
     #data
     year <- c(0:input$years)
     no_contrib <- rep(0, input$years + 1)
     fixed_contrib <- rep(0, input$years + 1)
     growing_contrib <- rep(0, input$years + 1)
     
-    return <- input$return/100
+    ret <- input$return/100
     growth <- input$growth/100
     
     for (t in year) {
-      no_contrib[t+1] <- future_value(input$initial, return, t)
-      fixed_contrib[t+1] <- future_value(input$initial, return, t) + annuity(input$contrib, return, t)
-      growing_contrib[t+1] <- future_value(input$initial, return, t) + growing_annuity(input$contrib, return, growth, t)
+      no_contrib[t+1] <- future_value(input$initial, ret, t)
+      fixed_contrib[t+1] <- future_value(input$initial, ret, t) + annuity(input$contrib, ret, t)
+      growing_contrib[t+1] <- future_value(input$initial, ret, t) + growing_annuity(input$contrib, ret, growth, t)
     }
     
     #no facet data
@@ -136,7 +137,8 @@ server <- function(input, output) {
     #graph
     if (input$facet == "No") {
       cols <- c("no_contrib" = 2, "fixed_contrib" = 3, "growing_contrib" = 4)
-      print(ggplot(modalities) + 
+      print(
+      ggplot(modalities) + 
         geom_line(aes(x=year, y=no_contrib, color = "no_contrib"), size=1, alpha=.5) + 
         geom_point(aes(x=year, y=no_contrib, color = "no_contrib"), size=.7, alpha=.5) + 
         geom_line(aes(x=year, y=fixed_contrib, color = "fixed_contrib"), size=1, alpha=.5) + 
@@ -149,32 +151,35 @@ server <- function(input, output) {
                              "fixed_contrib", 
                              "growing_contrib"), 
                            values = cols) + 
-        labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)"))
-    } else {
-      print(ggplot(modalities2) + 
+        labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)")
+      )
+      } else {
+      print(
+        ggplot(modalities2) + 
         geom_area(aes(x = year, y = balances, color = variable, fill = variable), alpha = .5) + 
         geom_point(aes(x = year, y = balances, color = variable), size = .5) + 
         theme_bw() + 
         facet_grid(.~variable) + 
-        labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)"))
+        labs(title = "Three Modes of Investing", x = "time (years)", y = "future value of investment (dollars)")
+      )
     }
-    
   })
   
   output$table <- renderTable({
+    
     #data
     year <- c(0:input$years)
     no_contrib <- rep(0, input$years + 1)
     fixed_contrib <- rep(0, input$years + 1)
     growing_contrib <- rep(0, input$years + 1)
     
-    return <- input$return/100
+    ret <- input$return/100
     growth <- input$growth/100
     
     for (t in year) {
-      no_contrib[t+1] <- future_value(input$initial, return, t)
-      fixed_contrib[t+1] <- future_value(input$initial, return, t) + annuity(input$contrib, return, t)
-      growing_contrib[t+1] <- future_value(input$initial, return, t) + growing_annuity(input$contrib, return, growth, t)
+      no_contrib[t+1] <- future_value(input$initial, ret, t)
+      fixed_contrib[t+1] <- future_value(input$initial, ret, t) + annuity(input$contrib, ret, t)
+      growing_contrib[t+1] <- future_value(input$initial, ret, t) + growing_annuity(input$contrib, ret, growth, t)
     }
     
     modalities <- as.data.frame(matrix(c(year, no_contrib, fixed_contrib, growing_contrib), input$years + 1, 4, dimnames = list(0:input$years, c("year", "no_contrib", "fixed_contrib", "growing_contrib"))))
