@@ -1,7 +1,3 @@
-library(testthat)
-
-source("~/Desktop/stat133/git/hw-stat133/binomial/R/priv_check_func.R")
-
 context("test prob input")
 test_that("function reacts to prob as expected", {
   x <- 0.4
