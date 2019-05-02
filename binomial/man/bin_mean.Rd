@@ -18,5 +18,6 @@ expected number of successes in n trials
 computes expected value or mean of a binomial distribution
 }
 \examples{
+bin_mean(trials=5, prob=0.5)
 bin_mean(10, 0.3)
 }

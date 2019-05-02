@@ -1,6 +1,6 @@
 library(testthat)
 
-source("~/Desktop/stat133/workouts/workout03/binomial/R/priv_check_func.R")
+source("~/Desktop/stat133/git/hw-stat133/binomial/R/priv_check_func.R")
 
 context("test prob input")
 test_that("function reacts to prob as expected", {

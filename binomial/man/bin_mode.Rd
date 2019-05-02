@@ -18,5 +18,6 @@ most probable number of successes
 computes most likely number of successes
 }
 \examples{
+bin_mode(trials=5, prob=0.5)
 bin_mode(10, 0.3)
 }

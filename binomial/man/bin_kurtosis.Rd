@@ -18,5 +18,6 @@ kurtosis of binomial distribution
 measures tailedness of probability distribution
 }
 \examples{
+bin_kurtosis(trials=5, prob=0.5)
 bin_kurtosis(10, 0.3)
 }

@@ -1,6 +1,6 @@
 library(testthat)
 
-source("~/Desktop/stat133/workouts/workout03/binomial/R/main_bin_func.R")
+source("~/Desktop/stat133/git/hw-stat133/binomial/R/main_bin_func.R")
 
 context("test choose binomial")
 test_that("choose binomial as expected", {

@@ -18,5 +18,6 @@ variance of the expected value of a binomial distribution
 computes variance of a binomial distribution
 }
 \examples{
+bin_variance(trials=5, prob=0.5)
 bin_variance(10, 0.3)
 }

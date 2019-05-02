@@ -18,5 +18,6 @@ skewness of binomial distribution
 measures degree of asymmetry of probability distribution around mean
 }
 \examples{
+bin_skewness(trials=5, prob=0.5)
 bin_skewness(10, 0.3)
 }

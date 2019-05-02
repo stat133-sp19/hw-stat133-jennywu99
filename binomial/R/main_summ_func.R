@@ -5,6 +5,7 @@
 #' @return expected number of successes in n trials
 #' @export
 #' @examples
+#' bin_mean(trials=5, prob=0.5)
 #' bin_mean(10, 0.3)
 bin_mean <- function(trials, prob) {
   check_trials(trials)
@@ -19,6 +20,7 @@ bin_mean <- function(trials, prob) {
 #' @return variance of the expected value of a binomial distribution
 #' @export
 #' @examples
+#' bin_variance(trials=5, prob=0.5)
 #' bin_variance(10, 0.3)
 bin_variance <- function(trials, prob) {
   check_trials(trials)
@@ -33,6 +35,7 @@ bin_variance <- function(trials, prob) {
 #' @return most probable number of successes
 #' @export
 #' @examples
+#' bin_mode(trials=5, prob=0.5)
 #' bin_mode(10, 0.3)
 bin_mode <- function(trials, prob) {
   check_trials(trials)
@@ -47,6 +50,7 @@ bin_mode <- function(trials, prob) {
 #' @return skewness of binomial distribution
 #' @export
 #' @examples
+#' bin_skewness(trials=5, prob=0.5)
 #' bin_skewness(10, 0.3)
 bin_skewness <- function(trials, prob) {
   check_trials(trials)
@@ -61,6 +65,7 @@ bin_skewness <- function(trials, prob) {
 #' @return kurtosis of binomial distribution
 #' @export
 #' @examples
+#' bin_kurtosis(trials=5, prob=0.5)
 #' bin_kurtosis(10, 0.3)
 bin_kurtosis <- function(trials, prob) {
   check_trials(trials)

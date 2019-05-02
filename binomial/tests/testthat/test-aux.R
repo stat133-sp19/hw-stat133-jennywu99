@@ -1,6 +1,6 @@
 library(testthat)
 
-source("~/Desktop/stat133/workouts/workout03/binomial/R/priv_aux_func.R")
+source("~/Desktop/stat133/git/hw-stat133/binomial/R/priv_aux_func.R")
 
 n <- 10
 p <- 0.3
