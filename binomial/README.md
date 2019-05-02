@@ -2,8 +2,8 @@
 a package containing functions to calculate the binomial distribution and various summary measures (mean, variance, skew, etc.) based on number of successes, number of trials, and probability
 
 ## main functions
-+ `bin_choose()` for the number of combinations of successes in $n$ trials
-+ `bin_probability()` for probability of $k$ successes in $n$ trials
++ `bin_choose()` for the number of combinations of successes in n trials
++ `bin_probability()` for probability of k successes in n trials
 + `bin_distribution()` for binomial probability distribution
 + `bin_cumulative()` for cumulative probabilities of binomial distribution
 + `bin_variable()` for description of input parameters
