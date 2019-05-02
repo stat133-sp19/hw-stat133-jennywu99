@@ -1,0 +1,69 @@
+#' @export
+plot.bindis <- function(x) {
+  barplot(x$probability,
+          names.arg = x$success,
+          main = "binomial distribution",
+          xlab = "successes",
+          ylab = "probability")
+}
+
+#' @export
+plot.bincum <- function(dat) {
+  plot(dat$success,
+       dat$cumulative,
+       type = "o",
+       main = "cumulative binomial distribution",
+       xlab = "successes",
+       ylab = "probability")
+}
+
+#' @export
+print.binvar <- function(var) {
+  cat('"binomial variable"\n\n')
+  cat('parameters\n')
+  cat(sprintf('- number of trials: %s',
+              var$`number of trials`), "\n")
+  cat(sprintf('- prob of success: %s',
+              var$`probability of success`))
+}
+
+#' @export
+summary.binvar <- function(var) {
+  n <- var$`number of trials`
+  p <- var$`probability of success`
+  mean <- aux_mean(n,p)
+  vari <- aux_variance(n,p)
+  mode <- aux_mode(n,p)
+  skew <- aux_skewness(n,p)
+  kurt <- aux_kurtosis(n,p)
+  obj <- list("number of trials"=n,
+              "probability of success"=p,
+              "mean or expected value"=mean,
+              "variance"=vari,
+              "mode"=mode,
+              "skewness"=skew,
+              "kurtosis"=kurt)
+  class(obj) <- "summary.binvar"
+  return(obj)
+}
+
+#' @export
+print.summary.binvar <- function(summ) {
+  cat('"binomial variable"\n\n')
+  cat('parameters\n')
+  cat(sprintf('- number of trials: %s',
+              summ$`number of trials`), "\n")
+  cat(sprintf('- prob of success: %s',
+              summ$`probability of success`), "\n\n")
+  cat('measures\n')
+  cat(sprintf('- mean: %s',
+              summ$`mean or expected value`), "\n")
+  cat(sprintf('- variance: %s',
+              summ$`variance`), "\n")
+  cat(sprintf('- mode: %s',
+              summ$`mode`), "\n")
+  cat(sprintf('- skewness: %s',
+              summ$`skewness`), "\n")
+  cat(sprintf('- kurtosis: %s',
+              summ$`kurtosis`))
+}

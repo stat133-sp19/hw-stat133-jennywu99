@@ -1,0 +1,74 @@
+---
+title: "Warmup 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Kazuda Xiono
+
+![](https://vignette.wikia.nocookie.net/starwars/images/b/ba/Kaz_Resistance.png/revision/latest?cb=20180903011341)
+
+\  
+
+> "In my mind, that's what I was—Kazuda Xiono, the best starfighter pilot in the galaxy."
+
+| Description | Value |
+| ----------- | ----- |
+| Species     | Human |
+| Gender      | Male  |
+| Eye Color   | Brown |
+| Hair Color  | Black |
+| Skin Color  | Light |
+
+\  
+
+# Date Breakfast Squares
+[recipe source](https://smittenkitchen.com/2015/11/date-breakfast-squares/)
+![](https://scontent-sjc3-1.xx.fbcdn.net/v/t1.15752-9/51304355_1962981130664966_3871260431423111168_n.png?_nc_cat=107&_nc_ht=scontent-sjc3-1.xx&oh=ced109d806e7e62878472646cd3cb1a3&oe=5CFB7EE6)
+
++ perfect for the winter/holiday season
++ play around with the spices to match your preferences
+
+## Ingredients
+### Filling
++ 1 1/2 cups (8 ounces) pitted dates, chopped
++ 3/4 cup water
++ 1 teaspoon finely grated orange (or mandarin or clementine) zest
+
+### Crumbs
++ 2 tablespoons packed brown sugar
++ 1/4 cup raw or turbinado sugar
++ 1/2 cup olive oil, coconut oil, melted butter or a mix of the above
++ 3/4 cups rolled oats, I used quick-cooking but old-fashioned should work just fine
++ 3/4 cup plus 2 tablespoons whole wheat flour, or a wholegrain flour mix of your choice
++ 1/2 teaspoon ground cinnamon
++ A few gratings of fresh nutmeg
++ A pinch or two of ground cloves
++ 1/4 teaspoon baking soda
++ 1/4 teaspoon coarse sea salt
+
+### Tools
++ 8x8 pan
++ parchment paper
++ small saucepan
++ large bowl
+
+\  
+
+# Euclidean Distance
+## Definition
+The **Euclidean distance** between points **p** and **q** is the length of the line segment connecting them ($\overline{\textbf{pq}}$).
+
+In Cartesian corrdinates, if **p** = (*p~1~*, *p~2~*, ..., *p~n~*) and **q** = (*q~1~*, *q~2~*, ..., *q~n~*) are two points in Euclidean *n*-space, then the distance (d) from **p** to **q**, or from **q** to **p** is given by the Pythagorean formula:
+
+$$d(\textbf{p}, \textbf{q}) = d(\textbf{q}, \textbf{p}) = \sqrt{(q_1 - p_1)^2 + (q_2 - p_2)^2 + ... + (q_n - p_n)^2}$$
+$$ = \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}$$
+
+The position of a point in a Euclidean *n*-space is a Euclidean vector. So, **p** and **q** may be represented as Euclidean vectors, starting from the origin of the space (initial point) with their tips (terminal points) ending at the two points. The **Euclidean norm**, or **Euclidean length**, or **magnitude** of a vector measures the length of the vector:
+
+$$||\textbf{p}|| = \sqrt{p_1^2 + p_2^2 + ... + p_n^2} = \sqrt{\textbf{p} \cdot \textbf{p}}$$
+
+where the last expression involves the dot product.

@@ -1,0 +1,18 @@
+Package: binomial
+Type: Package
+Title: Models Binomial Distribution
+Version: 0.1.0
+Author: Jenny Wu
+Maintainer: Jenny Wu <jennywu@berkeley.edu>
+Description: Functions to calculate the binomial distribution
+    and various summary measures (mean, variance, skew, etc.)
+    based on number of successes, number of trials, and probability.
+Imports: graphics
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1

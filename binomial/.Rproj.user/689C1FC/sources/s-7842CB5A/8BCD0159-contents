@@ -1,0 +1,78 @@
+---
+title: "Lab 2"
+output: html_document
+---
+
+```{r setrmup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r nba}
+load('nba2018-salary-points.RData')
+
+# Subsetting Vectors
+four <- head(player, n = 4)
+four[1]
+four[0]
+four[-1]
+four[-c(1,2,3)]
+four[5]
+four[c(1,2,2,3,3,3)]
+
+# Sequences & Repetitions
+player[seq(from = 2, to = length(player), by = 2)]
+salary[seq(from = 1, to = length(salary), by = 2)]
+team[seq(from = 5, to = length(team), by = 5)]
+scored[seq(from = 10, to = length(scored), by = 10)]
+rev(team[seq(from = 2, to = length(team), by =2)])
+
+# Logical Subsetting
+player[position == "C" & team == "GSW"]
+player[team == "GSW" | team == "LAL"]
+player[team == "LAL" & (position == "SG" | position == "PG")]
+player[position == "SF" & (team == "GSW" | team == "LAL")]
+player[which.max(salary)]
+player[which.min(salary)]
+player[which.max(scored)]
+salary[which.max(scored)]
+salary[which.max(position == "C")]
+team[which.max(scored)]
+player[which.max(points3)]
+
+# Plotting
+library(plotly)
+plot_ly(x = scored, y = salary, type = "scatter", mode = "markers")
+log_scored <- log(scored)
+log_salary <- log(salary)
+plot(log_scored, log_salary)
+text(log_scored, log_salary, labels = player)
+plot(log_scored, log_salary)
+text(log_scored, log_salary, labels = abbreviate(player))
+
+GSW_points <- scored[team == "GSW"]
+GSW_salary <- salary[team == "GSW"]
+GSW_players <- player[team == "GSW"]
+plot(GSW_points, GSW_salary)
+text(GSW_points, GSW_salary, labels = GSW_players)
+
+log_GSW_points <- log(GSW_points)
+log_GSW_salary <- log(GSW_salary)
+plot(log_GSW_points, log_GSW_salary)
+text(log_GSW_points, log_GSW_salary, labels = GSW_players)
+
+# Maniuplating Factors
+position_fac <- factor(position)
+position_fac[team == "GSW"]
+position_fac[salary > 15000000]
+table(position_fac[salary > 15000000])
+SG_count <- table(team[position_fac == "SG"])
+team_count <- table(team)
+SG_count/team_count
+
+# More Plots
+plot(scored, salary)
+plot(scored, salary, col = position_fac)
+plot(scored, salary, pch = 1:5)
+plot(scored, salary, cex = 2)
+plot(scored, salary, xlab = "total points scored", ylab = "player salary")
+```

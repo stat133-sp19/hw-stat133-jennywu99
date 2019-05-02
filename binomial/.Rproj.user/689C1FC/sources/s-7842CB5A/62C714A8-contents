@@ -1,0 +1,76 @@
+---
+title: "Getting Started with binomial"
+author: "Jenny Wu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{Introduction to binomial}
+    %\VignetteEngine{knitr::markdown}
+    \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(binomial)
+```
+
+# Introduction
+---
+The package `"binomial"` provides functions to help help calculate and model various parts of a binomial distribution.
+
+## Binomial Distribution
+The binomial distribution is a discrete probability distribution that is from from the parameters of $n$ trials with probability $p$ of success.
+
+\ 
+
+# Main functions in `"binomial"`
++ `bin_choose()` for the number of combinations of $k$ successes in $n$ trials
++ `bin_probability()` for probability of $k$ successes in $n$ trials
++ `bin_distribution()` for binomial probability distribution
++ `bin_cumulative()` for cumulative probabilities of binomial distribution
++ `bin_variable()` for description of input parameters
+
+## `bin_choose()`
+This function will give you the number of possible combinations of successes given the inputs of $n$ trials and $k$ successes.
+
+For example:
+The number of combinations of 2 successes in 5 trials =
+```{r choose}
+bin_choose(n = 5, k = 2)
+```
+
+## `bin_probability()`
+This function gives you the probability of $k$ successes in $n$ trials with probability $p$ of success.
+
+For example:
+The probability of 2 successes in 5 trials with probability 0.5 =
+```{r prob}
+bin_probability(success = 2, trials = 5, prob = 0.5)
+```
+
+## `bin_distribution()`
+This function gives you the probability distribution of success in $n$ trials with probability $p$ as a data frame.
+
+For example:
+The binomial distribution of 5 trials with probability 0.5 is
+```{r dis}
+bin_distribution(trials = 5, prob = 0.5)
+```
+
+## `bin_cumulative()`
+This function gives you the cumulative distribution of success in $n$ trials with probability $p$ as a data frame in addition to the normal binomial distribution as given in `bin_distribution()`.
+
+For example:
+The cumulative and normal binomial distributions of 5 trials with probability 0.5 is
+```{r cumulative}
+bin_cumulative(trials = 5, prob = 0.5)
+```
+
+## `bin_variable()`
+This function is simply an easy way to nicely print the parameters of the inputs (number of trials and probability of success).
+
+For example:
+5 trials with a probability 0.5
+```{r var}
+bin_variable(trials = 5, prob = 0.5)
+```

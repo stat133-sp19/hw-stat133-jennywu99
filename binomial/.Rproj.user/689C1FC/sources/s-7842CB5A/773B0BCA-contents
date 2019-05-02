@@ -1,0 +1,3 @@
+Workout 03: binomial package
+
+a package containing functions to calculate the binomial distribution and various summary measures (mean, variance, skew, etc.) based on number of successes, number of trials, and probability
